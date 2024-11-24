@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 public class Paquete {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idPaquete;
+    private Integer idPaquete;
 
     @Column(nullable = false, length = 50)
     private String estadoPaquete;
@@ -32,7 +32,7 @@ public class Paquete {
     public Paquete() {
     }
 
-    public Paquete(Long idPaquete, String estadoPaquete, Double peso, Double costo, String nombreReceptor, Solicitud solicitud, Mensajero mensajero) {
+    public Paquete(Integer idPaquete, String estadoPaquete, Double peso, Double costo, String nombreReceptor, Solicitud solicitud, Mensajero mensajero) {
         this.idPaquete = idPaquete;
         this.estadoPaquete = estadoPaquete;
         this.peso = peso;
@@ -55,11 +55,11 @@ public class Paquete {
                 '}';
     }
 
-    public Long getIdPaquete() {
+    public Integer getIdPaquete() {
         return idPaquete;
     }
 
-    public void setIdPaquete(Long idPaquete) {
+    public void setIdPaquete(int idPaquete) {
         this.idPaquete = idPaquete;
     }
 

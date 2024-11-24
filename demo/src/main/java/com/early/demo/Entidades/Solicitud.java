@@ -11,7 +11,7 @@ import java.util.List;
 public class Solicitud {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idSolicitud;
+    private Integer idSolicitud;
 
     @Column(nullable = false)
     private LocalDate fechaCreacion;
@@ -55,7 +55,7 @@ public class Solicitud {
     public Solicitud() {
     }
 
-    public Solicitud(Long idSolicitud, LocalDate fechaCreacion, String estadoSolicitud, String metodoPago, String descripcion, String direccionEntrega, String direccionRecogida, Integer calificacionCliente, Integer calificacionMensajero, Cliente cliente, Emprendimiento emprendimiento, Mensajero mensajero, List<Paquete> paquetes) {
+    public Solicitud(int idSolicitud, LocalDate fechaCreacion, String estadoSolicitud, String metodoPago, String descripcion, String direccionEntrega, String direccionRecogida, Integer calificacionCliente, Integer calificacionMensajero, Cliente cliente, Emprendimiento emprendimiento, Mensajero mensajero, List<Paquete> paquetes) {
         this.idSolicitud = idSolicitud;
         this.fechaCreacion = fechaCreacion;
         this.estadoSolicitud = estadoSolicitud;
@@ -90,11 +90,11 @@ public class Solicitud {
                 '}';
     }
 
-    public Long getIdSolicitud() {
+    public int getIdSolicitud() {
         return idSolicitud;
     }
 
-    public void setIdSolicitud(Long idSolicitud) {
+    public void setIdSolicitud(int idSolicitud) {
         this.idSolicitud = idSolicitud;
     }
 

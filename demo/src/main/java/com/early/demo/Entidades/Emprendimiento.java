@@ -38,7 +38,7 @@ public class Emprendimiento extends Usuario {
         this.solicitudes = solicitudes;
     }
 
-    public Emprendimiento(Long idUsuario, String nombre, String telefono, String email, String contrasena, LocalDate fechaCreacion, String rol, String representanteLegal, String nidEmprendimiento, String nombreEmprendimiento, String direccion, String categoria, List<Solicitud> solicitudes) {
+    public Emprendimiento(Integer idUsuario, String nombre, String telefono, String email, String contrasena, LocalDate fechaCreacion, String rol, String representanteLegal, String nidEmprendimiento, String nombreEmprendimiento, String direccion, String categoria, List<Solicitud> solicitudes) {
         super(idUsuario, nombre, telefono, email, contrasena, fechaCreacion, rol);
         this.representanteLegal = representanteLegal;
         this.nidEmprendimiento = nidEmprendimiento;

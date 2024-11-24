@@ -8,6 +8,7 @@ import java.util.List;
 @Entity
 @Table(name = "mensajeros")
 public class Mensajero extends Usuario {
+
     @Column(nullable = false, length = 100)
     private String zona;
 
