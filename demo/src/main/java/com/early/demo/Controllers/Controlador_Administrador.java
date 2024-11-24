@@ -9,23 +9,24 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/admin")
 public class Controlador_Administrador {
 
     @Autowired
     private servicio_Administrador serv_admi;
 
     @GetMapping("/lista")
-    public List<Administrador> lista(){
+    public List<Administrador> lista() {
         return serv_admi.getUsuarios();
     }
 
     @PostMapping("/agregar")
-    public Administrador agregar(@RequestBody Administrador admi){
+    public Administrador agregar(@RequestBody Administrador admi) {
         return serv_admi.agregarUsuario(admi);
     }
 
     @PutMapping("/editar")
-    public Administrador editar(@RequestBody Administrador admi){
+    public Administrador editar(@RequestBody Administrador admi) {
         return serv_admi.editarUsuario(admi);
     }
 
@@ -34,3 +35,4 @@ public class Controlador_Administrador {
         return serv_admi.eliminarAdministrador(id);
     }
 }
+

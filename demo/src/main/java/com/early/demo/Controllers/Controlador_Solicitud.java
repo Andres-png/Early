@@ -9,23 +9,24 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/solicitud")
 public class Controlador_Solicitud {
 
     @Autowired
     private servicio_Solicitud serv_soli;
 
     @GetMapping("/lista")
-    public List<Solicitud> lista(){
+    public List<Solicitud> lista() {
         return serv_soli.getSolicitudes();
     }
 
     @PostMapping("/agregar")
-    public Solicitud agregar(@RequestBody Solicitud sol){
+    public Solicitud agregar(@RequestBody Solicitud sol) {
         return serv_soli.agregarSolicitud(sol);
     }
 
     @PutMapping("/editar")
-    public Solicitud editar(@RequestBody Solicitud sol){
+    public Solicitud editar(@RequestBody Solicitud sol) {
         return serv_soli.editarSolicitud(sol);
     }
 
@@ -33,5 +34,5 @@ public class Controlador_Solicitud {
     public Solicitud eliminarContraseña(@PathVariable Integer id) {
         return serv_soli.eliminarSolicitud(id);
     }
-
 }
+

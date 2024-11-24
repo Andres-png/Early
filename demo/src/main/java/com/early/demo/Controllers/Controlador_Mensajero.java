@@ -9,23 +9,24 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/mensajero")
 public class Controlador_Mensajero {
 
     @Autowired
     private servicio_Mensajero serv_mensa;
 
     @GetMapping("/lista")
-    public List<Mensajero> lista(){
+    public List<Mensajero> lista() {
         return serv_mensa.getMensajeros();
     }
 
     @PostMapping("/agregar")
-    public Mensajero agregar(@RequestBody Mensajero mensa){
+    public Mensajero agregar(@RequestBody Mensajero mensa) {
         return serv_mensa.agregarMensajero(mensa);
     }
 
     @PutMapping("/editar")
-    public Mensajero editar(@RequestBody Mensajero mensa){
+    public Mensajero editar(@RequestBody Mensajero mensa) {
         return serv_mensa.editarMensajero(mensa);
     }
 

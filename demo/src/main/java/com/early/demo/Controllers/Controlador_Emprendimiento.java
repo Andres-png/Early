@@ -9,23 +9,24 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/emprendimiento")
 public class Controlador_Emprendimiento {
 
     @Autowired
     private servicio_Emprendimiento serv_empren;
 
     @GetMapping("/lista")
-    public List<Emprendimiento> lista(){
+    public List<Emprendimiento> lista() {
         return serv_empren.getEmprendimientos();
     }
 
     @PostMapping("/agregar")
-    public Emprendimiento agregar(@RequestBody Emprendimiento empre){
+    public Emprendimiento agregar(@RequestBody Emprendimiento empre) {
         return serv_empren.agregarEmprendimiento(empre);
     }
 
     @PutMapping("/editar")
-    public Emprendimiento editar(@RequestBody Emprendimiento empre){
+    public Emprendimiento editar(@RequestBody Emprendimiento empre) {
         return serv_empren.editarEmprendimiento(empre);
     }
 
@@ -34,3 +35,4 @@ public class Controlador_Emprendimiento {
         return serv_empren.eliminarEmprendimiento(id);
     }
 }
+

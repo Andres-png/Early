@@ -9,23 +9,24 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/paquete")
 public class Controlador_Paquete {
 
     @Autowired
     private servicio_Paquete serv_paq;
 
     @GetMapping("/lista")
-    public List<Paquete> lista(){
+    public List<Paquete> lista() {
         return serv_paq.getPaquetes();
     }
 
     @PostMapping("/agregar")
-    public Paquete agregar(@RequestBody Paquete paq){
+    public Paquete agregar(@RequestBody Paquete paq) {
         return serv_paq.agregarPaquete(paq);
     }
 
     @PutMapping("/editar")
-    public Paquete editar(@RequestBody Paquete paq){
+    public Paquete editar(@RequestBody Paquete paq) {
         return serv_paq.editarPaquete(paq);
     }
 
@@ -34,3 +35,4 @@ public class Controlador_Paquete {
         return serv_paq.eliminarPaquete(id);
     }
 }
+

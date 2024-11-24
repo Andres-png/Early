@@ -9,24 +9,24 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/cliente")
 public class Controlador_Cliente {
-
 
     @Autowired
     private servicio_Cliente serv_cli;
 
     @GetMapping("/lista")
-    public List<Cliente> lista(){
+    public List<Cliente> lista() {
         return serv_cli.getClientes();
     }
 
     @PostMapping("/agregar")
-    public Cliente agregar(@RequestBody Cliente cli){
+    public Cliente agregar(@RequestBody Cliente cli) {
         return serv_cli.agregarCliente(cli);
     }
 
     @PutMapping("/editar")
-    public Cliente editar(@RequestBody Cliente cli){
+    public Cliente editar(@RequestBody Cliente cli) {
         return serv_cli.editarCliente(cli);
     }
 
@@ -35,3 +35,4 @@ public class Controlador_Cliente {
         return serv_cli.eliminarCliente(id);
     }
 }
+

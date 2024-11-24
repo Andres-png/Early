@@ -9,23 +9,24 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/usuario")
 public class Controlador_Usuario {
 
     @Autowired
     private servicio_Usuario serv_usu;
 
     @GetMapping("/lista")
-    public List<Usuario> lista(){
+    public List<Usuario> lista() {
         return serv_usu.getUsuarios();
     }
 
     @PostMapping("/agregar")
-    public Usuario agregar(@RequestBody Usuario usu){
+    public Usuario agregar(@RequestBody Usuario usu) {
         return serv_usu.agregarUsuario(usu);
     }
 
     @PutMapping("/editar")
-    public Usuario editar(@RequestBody Usuario usu){
+    public Usuario editar(@RequestBody Usuario usu) {
         return serv_usu.editarUsuario(usu);
     }
 
@@ -33,5 +34,4 @@ public class Controlador_Usuario {
     public Usuario eliminarContraseña(@PathVariable int id) {
         return serv_usu.eliminarUsuario(id);
     }
-
 }

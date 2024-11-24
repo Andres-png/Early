@@ -33,6 +33,10 @@ public abstract class Usuario {
     @Column(nullable = false, length = 50)
     private String rol;
 
+    @ManyToOne
+    @JoinColumn(name = "administrador_id")
+    private Administrador administrador;
+
 
     
     public Usuario() {
