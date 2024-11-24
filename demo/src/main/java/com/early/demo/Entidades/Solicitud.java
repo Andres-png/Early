@@ -2,90 +2,124 @@ package com.early.demo.Entidades;
 
 import jakarta.persistence.*;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.util.List;
+
 
 @Entity
+@Table(name = "solicitudes")
 public class Solicitud {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_solicitud;
+    private Long idSolicitud;
 
     @Column(nullable = false)
-    private Date fecha_creacion;
+    private LocalDate fechaCreacion;
 
-    @Column(nullable = false)
-    private Date fecha_entrega;
+    @Column(nullable = false, length = 50)
+    private String estadoSolicitud;
 
-    @Column(nullable = false, length = 200)
+    @Column(nullable = false, length = 50)
+    private String metodoPago;
+
+    @Column(length = 255)
     private String descripcion;
 
-    @Column(nullable = false, length = 20)
-    private String metodo_pago;
+    @Column(nullable = false, length = 255)
+    private String direccionEntrega;
 
-    @Column(nullable = false, length = 5)
-    private int calificacion_cliente;
+    @Column(nullable = false, length = 255)
+    private String direccionRecogida;
 
-    // Relación muchas solicitudes un usuario
+    @Column
+    private Integer calificacionCliente;
+
+    @Column
+    private Integer calificacionMensajero;
+
     @ManyToOne
-    @JoinColumn(name = "usuario_id", nullable = false)
-    private Usuario usuario;
+    @JoinColumn(name = "cliente_id", nullable = false)
+    private Cliente cliente;
 
-    // Relación una solicitud un paquete
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "paquete_id", referencedColumnName = "id_paquete")
-    private Paquete paquete;
+    @ManyToOne
+    @JoinColumn(name = "emprendimiento_id", nullable = false)
+    private Emprendimiento emprendimiento;
+
+    @ManyToOne
+    @JoinColumn(name = "mensajero_id")
+    private Mensajero mensajero;
+
+    @OneToMany(mappedBy = "solicitud")
+    private List<Paquete> paquetes;
 
     public Solicitud() {
     }
 
-    public Solicitud(int id_solicitud, Date fecha_creacion, Date fecha_entrega, String descripcion, String metodo_pago, int calificacion_cliente, Usuario usuario, Paquete paquete) {
-        this.id_solicitud = id_solicitud;
-        this.fecha_creacion = fecha_creacion;
-        this.fecha_entrega = fecha_entrega;
+    public Solicitud(Long idSolicitud, LocalDate fechaCreacion, String estadoSolicitud, String metodoPago, String descripcion, String direccionEntrega, String direccionRecogida, Integer calificacionCliente, Integer calificacionMensajero, Cliente cliente, Emprendimiento emprendimiento, Mensajero mensajero, List<Paquete> paquetes) {
+        this.idSolicitud = idSolicitud;
+        this.fechaCreacion = fechaCreacion;
+        this.estadoSolicitud = estadoSolicitud;
+        this.metodoPago = metodoPago;
         this.descripcion = descripcion;
-        this.metodo_pago = metodo_pago;
-        this.calificacion_cliente = calificacion_cliente;
-        this.usuario = usuario;
-        this.paquete = paquete;
+        this.direccionEntrega = direccionEntrega;
+        this.direccionRecogida = direccionRecogida;
+        this.calificacionCliente = calificacionCliente;
+        this.calificacionMensajero = calificacionMensajero;
+        this.cliente = cliente;
+        this.emprendimiento = emprendimiento;
+        this.mensajero = mensajero;
+        this.paquetes = paquetes;
     }
 
     @Override
     public String toString() {
         return "Solicitud{" +
-                "id_solicitud=" + id_solicitud +
-                ", fecha_creacion=" + fecha_creacion +
-                ", fecha_entrega=" + fecha_entrega +
+                "idSolicitud=" + idSolicitud +
+                ", fechaCreacion=" + fechaCreacion +
+                ", estadoSolicitud='" + estadoSolicitud + '\'' +
+                ", metodoPago='" + metodoPago + '\'' +
                 ", descripcion='" + descripcion + '\'' +
-                ", metodo_pago='" + metodo_pago + '\'' +
-                ", calificacion_cliente=" + calificacion_cliente +
-                ", usuario=" + usuario +
-                ", paquete=" + paquete +
+                ", direccionEntrega='" + direccionEntrega + '\'' +
+                ", direccionRecogida='" + direccionRecogida + '\'' +
+                ", calificacionCliente=" + calificacionCliente +
+                ", calificacionMensajero=" + calificacionMensajero +
+                ", cliente=" + cliente +
+                ", emprendimiento=" + emprendimiento +
+                ", mensajero=" + mensajero +
+                ", paquetes=" + paquetes +
                 '}';
     }
 
-    public int getId_solicitud() {
-        return id_solicitud;
+    public Long getIdSolicitud() {
+        return idSolicitud;
     }
 
-    public void setId_solicitud(int id_solicitud) {
-        this.id_solicitud = id_solicitud;
+    public void setIdSolicitud(Long idSolicitud) {
+        this.idSolicitud = idSolicitud;
     }
 
-    public Date getFecha_creacion() {
-        return fecha_creacion;
+    public LocalDate getFechaCreacion() {
+        return fechaCreacion;
     }
 
-    public void setFecha_creacion(Date fecha_creacion) {
-        this.fecha_creacion = fecha_creacion;
+    public void setFechaCreacion(LocalDate fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
     }
 
-    public Date getFecha_entrega() {
-        return fecha_entrega;
+    public String getEstadoSolicitud() {
+        return estadoSolicitud;
     }
 
-    public void setFecha_entrega(Date fecha_entrega) {
-        this.fecha_entrega = fecha_entrega;
+    public void setEstadoSolicitud(String estadoSolicitud) {
+        this.estadoSolicitud = estadoSolicitud;
+    }
+
+    public String getMetodoPago() {
+        return metodoPago;
+    }
+
+    public void setMetodoPago(String metodoPago) {
+        this.metodoPago = metodoPago;
     }
 
     public String getDescripcion() {
@@ -96,35 +130,68 @@ public class Solicitud {
         this.descripcion = descripcion;
     }
 
-    public String getMetodo_pago() {
-        return metodo_pago;
+    public String getDireccionEntrega() {
+        return direccionEntrega;
     }
 
-    public void setMetodo_pago(String metodo_pago) {
-        this.metodo_pago = metodo_pago;
+    public void setDireccionEntrega(String direccionEntrega) {
+        this.direccionEntrega = direccionEntrega;
     }
 
-    public int getCalificacion_cliente() {
-        return calificacion_cliente;
+    public String getDireccionRecogida() {
+        return direccionRecogida;
     }
 
-    public void setCalificacion_cliente(int calificacion_cliente) {
-        this.calificacion_cliente = calificacion_cliente;
+    public void setDireccionRecogida(String direccionRecogida) {
+        this.direccionRecogida = direccionRecogida;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public Integer getCalificacionCliente() {
+        return calificacionCliente;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setCalificacionCliente(Integer calificacionCliente) {
+        this.calificacionCliente = calificacionCliente;
     }
 
-    public Paquete getPaquete() {
-        return paquete;
+    public Integer getCalificacionMensajero() {
+        return calificacionMensajero;
     }
 
-    public void setPaquete(Paquete paquete) {
-        this.paquete = paquete;
+    public void setCalificacionMensajero(Integer calificacionMensajero) {
+        this.calificacionMensajero = calificacionMensajero;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public Emprendimiento getEmprendimiento() {
+        return emprendimiento;
+    }
+
+    public void setEmprendimiento(Emprendimiento emprendimiento) {
+        this.emprendimiento = emprendimiento;
+    }
+
+    public Mensajero getMensajero() {
+        return mensajero;
+    }
+
+    public void setMensajero(Mensajero mensajero) {
+        this.mensajero = mensajero;
+    }
+
+    public List<Paquete> getPaquetes() {
+        return paquetes;
+    }
+
+    public void setPaquetes(List<Paquete> paquetes) {
+        this.paquetes = paquetes;
     }
 }
+

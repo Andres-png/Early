@@ -3,104 +3,96 @@ package com.early.demo.Entidades;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "paquetes")
 public class Paquete {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_paquete;
+    private Long idPaquete;
+
+    @Column(nullable = false, length = 50)
+    private String estadoPaquete;
 
     @Column(nullable = false)
-    private boolean estado;
+    private Double peso;
 
-    @Column(nullable = false, length = 50)
-    private String direccion_entrega;
+    @Column(nullable = false)
+    private Double costo;
 
-    @Column(nullable = false, length = 50)
-    private String direccion_recogida;
+    @Column(nullable = false, length = 100)
+    private String nombreReceptor;
 
-    @Column(nullable = false, length = 50)
-    private int costo_por_tamaño;
-
-    // Relación muchos paquetes un usuario
     @ManyToOne
-    @JoinColumn(name = "usuario_id", nullable = false)
-    private Usuario usuario;
-
-    @OneToOne(mappedBy = "paquete", cascade = CascadeType.ALL)
+    @JoinColumn(name = "solicitud_id", nullable = false)
     private Solicitud solicitud;
+
+    @ManyToOne
+    @JoinColumn(name = "mensajero_id", nullable = false)
+    private Mensajero mensajero;
 
     public Paquete() {
     }
 
-    public Paquete(int id_paquete, boolean estado, String direccion_entrega, String direccion_recogida, int costo_por_tamaño, Usuario usuario, Solicitud solicitud) {
-        this.id_paquete = id_paquete;
-        this.estado = estado;
-        this.direccion_entrega = direccion_entrega;
-        this.direccion_recogida = direccion_recogida;
-        this.costo_por_tamaño = costo_por_tamaño;
-        this.usuario = usuario;
+    public Paquete(Long idPaquete, String estadoPaquete, Double peso, Double costo, String nombreReceptor, Solicitud solicitud, Mensajero mensajero) {
+        this.idPaquete = idPaquete;
+        this.estadoPaquete = estadoPaquete;
+        this.peso = peso;
+        this.costo = costo;
+        this.nombreReceptor = nombreReceptor;
         this.solicitud = solicitud;
+        this.mensajero = mensajero;
     }
 
     @Override
     public String toString() {
         return "Paquete{" +
-                "id_paquete=" + id_paquete +
-                ", estado=" + estado +
-                ", direccion_entrega='" + direccion_entrega + '\'' +
-                ", direccion_recogida='" + direccion_recogida + '\'' +
-                ", costo_por_tamaño=" + costo_por_tamaño +
-                ", usuario=" + usuario +
+                "idPaquete=" + idPaquete +
+                ", estadoPaquete='" + estadoPaquete + '\'' +
+                ", peso=" + peso +
+                ", costo=" + costo +
+                ", nombreReceptor='" + nombreReceptor + '\'' +
                 ", solicitud=" + solicitud +
+                ", mensajero=" + mensajero +
                 '}';
     }
 
-    public int getId_paquete() {
-        return id_paquete;
+    public Long getIdPaquete() {
+        return idPaquete;
     }
 
-    public void setId_paquete(int id_paquete) {
-        this.id_paquete = id_paquete;
+    public void setIdPaquete(Long idPaquete) {
+        this.idPaquete = idPaquete;
     }
 
-    public boolean isEstado() {
-        return estado;
+    public String getEstadoPaquete() {
+        return estadoPaquete;
     }
 
-    public void setEstado(boolean estado) {
-        this.estado = estado;
+    public void setEstadoPaquete(String estadoPaquete) {
+        this.estadoPaquete = estadoPaquete;
     }
 
-    public String getDireccion_entrega() {
-        return direccion_entrega;
+    public Double getPeso() {
+        return peso;
     }
 
-    public void setDireccion_entrega(String direccion_entrega) {
-        this.direccion_entrega = direccion_entrega;
+    public void setPeso(Double peso) {
+        this.peso = peso;
     }
 
-    public String getDireccion_recogida() {
-        return direccion_recogida;
+    public Double getCosto() {
+        return costo;
     }
 
-    public void setDireccion_recogida(String direccion_recogida) {
-        this.direccion_recogida = direccion_recogida;
+    public void setCosto(Double costo) {
+        this.costo = costo;
     }
 
-    public int getCosto_por_tamaño() {
-        return costo_por_tamaño;
+    public String getNombreReceptor() {
+        return nombreReceptor;
     }
 
-    public void setCosto_por_tamaño(int costo_por_tamaño) {
-        this.costo_por_tamaño = costo_por_tamaño;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setNombreReceptor(String nombreReceptor) {
+        this.nombreReceptor = nombreReceptor;
     }
 
     public Solicitud getSolicitud() {
@@ -110,4 +102,14 @@ public class Paquete {
     public void setSolicitud(Solicitud solicitud) {
         this.solicitud = solicitud;
     }
+
+    public Mensajero getMensajero() {
+        return mensajero;
+    }
+
+    public void setMensajero(Mensajero mensajero) {
+        this.mensajero = mensajero;
+    }
 }
+
+

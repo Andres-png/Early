@@ -2,96 +2,71 @@ package com.early.demo.Entidades;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
 @Entity
-public class Usuario {
+@Table(name = "usuarios")
+@Inheritance(strategy = InheritanceType.JOINED)
+public abstract class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer idUsuario;
 
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false, length = 100)
     private String nombre;
 
-    @Column(nullable = false, length = 20)
-    private String email_celular;
+    @Column(nullable = false, length = 15, unique = true)
+    private String telefono;
 
-    @Column(nullable = false, length = 15)
-    private String contraseña;
+    @Column(nullable = false, length = 100, unique = true)
+    private String email;
 
-    @Column(name = "fecha_creacion", nullable = false)
-    private Date fechaCreacion;
+    @Column(nullable = false, length = 255)
+    private String contrasena;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 20)
-    private Rol rol;
+    @Column(nullable = false)
+    private LocalDate fechaCreacion;
 
-    @Column(nullable = true, length = 15)
-    private String Zona;
-
-    @Column(nullable = true)
-    private Boolean Estado;
-
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = true, length = 15)
-    private Vehiculos vehiculo;
-
-    @Column(nullable = false, length = 15)
-    private String direccion;
-
-    // Relación un usuario muchos paquetes
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Paquete> paquetes;
-
-    // Relación un usuario muchas solicitudes
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Solicitud> solicitudes;
+    @Column(nullable = false, length = 50)
+    private String rol;
 
 
+    
     public Usuario() {
     }
 
-    public Usuario(Integer id, String nombre, String email_celular, String contraseña, Date fechaCreacion, Rol rol, String zona, Boolean estado, Vehiculos vehiculo, String direccion, List<Paquete> paquetes, List<Solicitud> solicitudes) {
-        this.id = id;
+    public Usuario(Integer idUsuario, String nombre, String telefono, String email, String contrasena, LocalDate fechaCreacion, String rol) {
+        this.idUsuario = idUsuario;
         this.nombre = nombre;
-        this.email_celular = email_celular;
-        this.contraseña = contraseña;
+        this.telefono = telefono;
+        this.email = email;
+        this.contrasena = contrasena;
         this.fechaCreacion = fechaCreacion;
         this.rol = rol;
-        Zona = zona;
-        Estado = estado;
-        this.vehiculo = vehiculo;
-        this.direccion = direccion;
-        this.paquetes = paquetes;
-        this.solicitudes = solicitudes;
     }
 
     @Override
     public String toString() {
         return "Usuario{" +
-                "id=" + id +
+                "idUsuario=" + idUsuario +
                 ", nombre='" + nombre + '\'' +
-                ", email_celular='" + email_celular + '\'' +
-                ", contraseña='" + contraseña + '\'' +
+                ", telefono='" + telefono + '\'' +
+                ", email='" + email + '\'' +
+                ", contrasena='" + contrasena + '\'' +
                 ", fechaCreacion=" + fechaCreacion +
-                ", rol=" + rol +
-                ", Zona='" + Zona + '\'' +
-                ", Estado=" + Estado +
-                ", vehiculo=" + vehiculo +
-                ", direccion='" + direccion + '\'' +
-                ", paquetes=" + paquetes +
-                ", solicitudes=" + solicitudes +
+                ", rol='" + rol + '\'' +
                 '}';
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdUsuario(Integer idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     public String getNombre() {
@@ -102,84 +77,43 @@ public class Usuario {
         this.nombre = nombre;
     }
 
-    public String getEmail_celular() {
-        return email_celular;
+    public String getTelefono() {
+        return telefono;
     }
 
-    public void setEmail_celular(String email_celular) {
-        this.email_celular = email_celular;
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
 
-    public String getContraseña() {
-        return contraseña;
+    public String getEmail() {
+        return email;
     }
 
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public Date getFechaCreacion() {
+    public String getContrasena() {
+        return contrasena;
+    }
+
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
+    }
+
+    public LocalDate getFechaCreacion() {
         return fechaCreacion;
     }
 
-    public void setFechaCreacion(Date fechaCreacion) {
+    public void setFechaCreacion(LocalDate fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
     }
 
-    public Rol getRol() {
+    public String getRol() {
         return rol;
     }
 
-    public void setRol(Rol rol) {
+    public void setRol(String rol) {
         this.rol = rol;
     }
-
-    public String getZona() {
-        return Zona;
-    }
-
-    public void setZona(String zona) {
-        Zona = zona;
-    }
-
-    public Boolean getEstado() {
-        return Estado;
-    }
-
-    public void setEstado(Boolean estado) {
-        this.Estado = estado;
-    }
-
-    public Vehiculos getVehiculo() {
-        return vehiculo;
-    }
-
-    public void setVehiculo(Vehiculos vehiculo) {
-        this.vehiculo = vehiculo;
-    }
-
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
-
-    public List<Paquete> getPaquetes() {
-        return paquetes;
-    }
-
-    public void setPaquetes(List<Paquete> paquetes) {
-        this.paquetes = paquetes;
-    }
-
-    public List<Solicitud> getSolicitudes() {
-        return solicitudes;
-    }
-
-    public void setSolicitudes(List<Solicitud> solicitudes) {
-        this.solicitudes = solicitudes;
-    }
 }
-

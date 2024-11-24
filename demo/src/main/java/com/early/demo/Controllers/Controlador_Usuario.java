@@ -16,7 +16,7 @@ public class Controlador_Usuario {
 
     @GetMapping("/lista")
     public List<Usuario> lista(){
-        return serv_usu.getPersona();
+        return serv_usu.getUsuarios();
     }
 
     @PostMapping("/agregar")
